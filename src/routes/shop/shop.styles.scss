@@ -1,0 +1,9 @@
+.products-container {
+  max-width: 83%;
+  margin: 30px auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  row-gap: 50px;
+}

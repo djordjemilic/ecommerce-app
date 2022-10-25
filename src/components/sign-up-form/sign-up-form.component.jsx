@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -46,6 +47,7 @@ const SignUp = () => {
         email,
         password
       );
+
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (err) {
@@ -80,7 +82,7 @@ const SignUp = () => {
         />
         <FormInput
           label="Password"
-          type="text"
+          type="password"
           required
           onChange={handleChange}
           name="password"
@@ -88,7 +90,7 @@ const SignUp = () => {
         />
         <FormInput
           label="Confirm Password"
-          type="text"
+          type="password"
           required
           onChange={handleChange}
           name="confirmPassword"
