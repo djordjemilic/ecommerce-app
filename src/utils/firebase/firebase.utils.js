@@ -41,20 +41,15 @@ gooogleProvider.setCustomParameters({
 export const auth = getAuth();
 
 // Sign in with GooglePopup
-export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, gooogleProvider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, gooogleProvider);
 
 // Sign in with GoogleRedirect
-export const signInWithGoogleRedirect = () =>
-  signInWithRedirect(auth, gooogleProvider);
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, gooogleProvider);
 
 export const db = getFirestore();
 
 ///////////
-export const addCollectionAndDocuments = async (
-  collectionKey,
-  objectsToAdd
-) => {
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
   const collectionReference = collection(db, collectionKey);
   const batch = writeBatch(db);
 
@@ -73,21 +68,11 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
 
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 /// Create user with Google Popup
-export const createUserDocumentFromAuth = async (
-  userAuth,
-  additionalInformation = {}
-) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
   if (!userAuth) return;
 
   const userDocRef = doc(db, "users", userAuth.uid);
@@ -131,5 +116,4 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 // onAuthStateChange
-export const onAuthStateChangedListener = (callback) =>
-  onAuthStateChanged(auth, callback);
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
