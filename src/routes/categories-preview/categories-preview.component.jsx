@@ -1,18 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import CateGoryPreview from "../../components/category-preview/category-preview.component";
-import { CategoriesContext } from "../../contexts/categories.context";
+import { useSelector } from "react-redux";
+import { selectCategoriesMap } from "../../store/categories/category.selector";
 
 const CategoriesPreview = () => {
-  const { categoriesMap } = useContext(CategoriesContext);
+  const categoriesMap = useSelector(selectCategoriesMap);
 
   return (
     <>
       {Object.keys(categoriesMap).map((title) => {
         const products = categoriesMap[title];
 
-        return (
-          <CateGoryPreview key={title} title={title} products={products} />
-        );
+        return <CateGoryPreview key={title} title={title} products={products} />;
       })}
     </>
   );
